@@ -58,3 +58,20 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+
+// Footer
+function includeHTML() {
+    let elements = document.querySelectorAll('[data-include-html]');
+    elements.forEach((element) => {
+        let file = element.getAttribute('data-include-html');
+        if (file) {
+            fetch(file)
+                .then(response => response.text())
+                .then(data => {
+                    element.innerHTML = data;
+                })
+                .catch(err => console.error('Error loading file:', err));
+        }
+    });
+}
+window.onload = includeHTML;
